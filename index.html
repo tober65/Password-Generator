@@ -1,16 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        var wantsLowerCase = prompt("Do you want lower case characters?");
-        var wantsUpperCase = prompt("Do you want upper case characters?");
-        var wantsNumerical = prompt("Do you want numerical characters?");
-        var wantsSpecial = prompt("Do you want special characters?");
+        var wantsLowerCase = confirm("Do you want lower case characters?");
+        var wantsUpperCase = confirm("Do you want upper case characters?");
+        var wantsNumerical = confirm("Do you want numerical characters?");
+        var wantsSpecial = confirm("Do you want special characters?");
+
+        var choicesString = "";
+
+        if (wantsLowerCase) {
+            choicesString += "abcdefghijklmnopqrstuvwxyz"
+        }
+        if (wantsUpperCase) {
+            choicesString += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        }
+        if (wantsNumerical) {
+            choicesString += "0123456789"
+        }
+        if (wantsSpecial) {
+            choicesString += "!@#$%^&*"
+        }
+
+        console.log(choicesString);
+
+        var passLength;
+        var invalidPassLength = true;
+
+        while (invalidPassLength) {
+            promptAnswer = prompt("How long do you want your password to be (8-128)?");
+
+            passLength = parseInt(promptAnswer);
+
+            invalidPassLength = isNaN(passLength) || passLength < 8 || passLength > 128;
+
+            if (invalidPassLength) {
+                alert("Please choose a number between 8 and 128")
+            }
+        }
+
+        var result = "";
+        var choicesLength = choicesString.length;
+        for (var i = 0; i < passLength; i++) {
+            result += choicesString.charAt(Math.floor(Math.random() * choicesLength));
+        }
+
+        console.log(result);
     </script>
 </body>
+
 </html>
