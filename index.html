@@ -5,12 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <textarea id="passwordArea" cols="128" placeholder="Password will appear here"></textarea>
-    <br>
-    <button onclick="getPassword()">Get Password</button>
+    <h1>Password Generator</h1>
+    <div class="container">
+        <h2>Generate a Password</h2>
+        <textarea id="passwordArea" cols="68" rows="2" placeholder="Password will appear here"></textarea>
+        <br>
+        <button class="get-btn" onclick="getPassword()">Get Password</button>
+    </div>
 
     <script>
         function getPassword() {
@@ -65,7 +71,7 @@
                 invalidPassLength = isNaN(passLength) || passLength < 8 || passLength > 128;
 
                 if (invalidPassLength) {
-                    alert("Please choose a number between 8 and 128")
+                    alert("Please choose a number between 8 and 128");
                 }
             }
 
