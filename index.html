@@ -8,54 +8,78 @@
 </head>
 
 <body>
-    <textarea cols="128" placeholder="Password will appear here"></textarea>
+    <textarea id="passwordArea" cols="128" placeholder="Password will appear here"></textarea>
     <br>
-    <button>Get Password</button>
+    <button onclick="getPassword()">Get Password</button>
+
     <script>
-        var wantsLowerCase = confirm("Do you want lower case characters?");
-        var wantsUpperCase = confirm("Do you want upper case characters?");
-        var wantsNumerical = confirm("Do you want numerical characters?");
-        var wantsSpecial = confirm("Do you want special characters?");
+        function getPassword() {
+            var wantsLowerCase;
+            var wantsUpperCase;
+            var wantsNumerical;
+            var wantsSpecial;
 
-        var choicesString = "";
+            var choicesString;
 
-        if (wantsLowerCase) {
-            choicesString += "abcdefghijklmnopqrstuvwxyz"
-        }
-        if (wantsUpperCase) {
-            choicesString += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        }
-        if (wantsNumerical) {
-            choicesString += "0123456789"
-        }
-        if (wantsSpecial) {
-            choicesString += "!@#$%^&*"
-        }
+            var validChoices = false;
 
-        console.log(choicesString);
+            while (!validChoices) {
 
-        var passLength;
-        var invalidPassLength = true;
+                choicesString = "";
 
-        while (invalidPassLength) {
-            promptAnswer = prompt("How long do you want your password to be (8-128)?");
+                wantsLowerCase = confirm("Do you want lower case characters?");
+                wantsUpperCase = confirm("Do you want upper case characters?");
+                wantsNumerical = confirm("Do you want numerical characters?");
+                wantsSpecial = confirm("Do you want special characters?");
 
-            passLength = parseInt(promptAnswer);
+                if (wantsLowerCase) {
+                    choicesString += "abcdefghijklmnopqrstuvwxyz";
+                }
+                if (wantsUpperCase) {
+                    choicesString += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                }
+                if (wantsNumerical) {
+                    choicesString += "0123456789";
+                }
+                if (wantsSpecial) {
+                    choicesString += "!@#$%^&*";
+                }
 
-            invalidPassLength = isNaN(passLength) || passLength < 8 || passLength > 128;
+                validChoices = wantsLowerCase || wantsUpperCase || wantsNumerical || wantsSpecial;
 
-            if (invalidPassLength) {
-                alert("Please choose a number between 8 and 128")
+                if (!validChoices) {
+                    alert("Please choose at least one set of characters");
+                }
             }
-        }
 
-        var result = "";
-        var choicesLength = choicesString.length;
-        for (var i = 0; i < passLength; i++) {
-            result += choicesString.charAt(Math.floor(Math.random() * choicesLength));
-        }
+            console.log(choicesString);
 
-        console.log(result);
+            var passLength;
+            var invalidPassLength = true;
+
+            while (invalidPassLength) {
+                promptAnswer = prompt("How long do you want your password to be (8-128)?");
+
+                passLength = parseInt(promptAnswer);
+
+                invalidPassLength = isNaN(passLength) || passLength < 8 || passLength > 128;
+
+                if (invalidPassLength) {
+                    alert("Please choose a number between 8 and 128")
+                }
+            }
+
+            var result = "";
+            var choicesLength = choicesString.length;
+            for (var i = 0; i < passLength; i++) {
+                result += choicesString.charAt(Math.floor(Math.random() * choicesLength));
+            }
+
+            console.log(result);
+
+            var passwordArea = document.getElementById("passwordArea");
+            passwordArea.value = result;
+        }
     </script>
 </body>
 
